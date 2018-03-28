@@ -5,11 +5,11 @@
     - role: "{{ role_name }}"
       tinyproxy_allows:
         - 127.0.0.1
-      tinyproxy_no_upstream:
-        - ".internal.example.com"
-        - "www.example.com"
-      tinyproxy_upstream:
-        - 'cust1_firewall:8008 "testbed_for_cust1"'
-        - 'firewall.internal.example.com:80'
-      tinyproxy_header:
-        - { name: "Proxy-Authorization", value: "Basic 0ts==" }
+#      tinyproxy_no_upstream:
+#        - ".internal.example.com"
+#        - "www.example.com"
+#      tinyproxy_upstream:
+#        - 'cust1_firewall:8008 "testbed_for_cust1"'
+#        - 'firewall.internal.example.com:80'
+#      tinyproxy_header:
+#        - { name: "Proxy-Authorization", value: "Basic 0ts==" }
