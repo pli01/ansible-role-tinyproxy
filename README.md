@@ -3,6 +3,8 @@ ansible-role-tinyproxy
 
 Ansible host for configure Tinyproxy
 
+[![Build Status](https://travis-ci.org/pli01/ansible-role-tinyproxy.svg?branch=master)](https://travis-ci.org/pli01/ansible-role-tinyproxy)
+
 
 # Examples
 
