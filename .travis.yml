@@ -5,9 +5,23 @@ before_install:
  - sudo apt-get update -qq
  - sudo apt-get install -qq python-apt python-pycurl
 install:
-  - pip install ansible
+  - pip install ansible ansible-lint
   - ansible --version
 script:
-  - echo localhost > inventory
-  - ansible-playbook -i inventory --syntax-check --list-tasks test.yml
-  - ansible-playbook -i inventory --connection=local --sudo -vvvv test.yml
+  - ansible-lint tasks/*.yml
+  - |
+    ANSIBLE_ROLES_PATH=$(pwd)/.. ansible-playbook \
+      -i tests/inventory \
+      -e "role_name=ansible-role-tinyproxy" \
+      tests/test.yml --syntax-check
+  - |
+    ANSIBLE_ROLES_PATH=$(pwd)/.. ansible-playbook \
+      -i tests/inventory \
+      -e "role_name=ansible-role-tinyproxy" \
+      tests/test.yml --list-tasks
+  - |
+    ANSIBLE_ROLES_PATH=$(pwd)/.. ansible-playbook \
+      -i tests/inventory \
+      -e "role_name=ansible-role-tinyproxy" \
+      --connection=local --sudo -v \
+      tests/test.yml

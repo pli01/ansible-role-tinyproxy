@@ -94,7 +94,9 @@ StatFile "{{tinyproxy_statfile}}"
 # and enable the Syslog directive.  These directives are mutually
 # exclusive.
 #
+{% if tinyproxy_logfile is defined and tinyproxy_logfile %}
 Logfile "{{tinyproxy_logfile}}"
+{% endif %}
 
 #
 # Syslog: Tell tinyproxy to use syslog instead of a logfile.  This
@@ -102,6 +104,9 @@ Logfile "{{tinyproxy_logfile}}"
 # These two directives are mutually exclusive.
 #
 #Syslog On
+{% if tinyproxy_syslog is defined and tinyproxy_syslog %}
+Syslog {{ tinyproxy_syslog }}
+{% endif %}
 
 #
 # LogLevel: 
@@ -169,6 +174,13 @@ PidFile "{{tinyproxy_pidfile}}"
 #  IP/mask  matches network/mask
 #
 #Upstream some.remote.proxy:port
+{% for noupstream in tinyproxy_no_upstream %}
+no upstream "{{ noupstream }}"
+{% endfor %}
+
+{% for upstream in tinyproxy_upstream %}
+upstream {{ upstream }}
+{% endfor %}
 
 #
 # MaxClients: This is the absolute highest number of threads which will
@@ -209,6 +221,9 @@ MaxRequestsPerChild {{tinyproxy_maxRequestsPerChild}}
 # The order of the controls are important. All incoming connections are
 # tested against the controls based on order.
 #
+{% for deny in tinyproxy_deny %}
+Deny {{ deny }}
+{% endfor %}
 {% for allow in tinyproxy_allows %}
 Allow {{allow}}
 {% endfor %}
@@ -222,6 +237,10 @@ Allow {{allow}}
 # traffic, as Tinyproxy has no control over what headers are exchanged.
 #
 #AddHeader "X-My-Header" "Powered by Tinyproxy"
+{% for header in tinyproxy_header %}
+AddHeader "{{ header.name }}" "{{ header.value }}"
+{% endfor %}
+
 
 #
 # ViaProxyName: The "Via" header is required by the HTTP RFC, but using
