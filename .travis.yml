@@ -8,7 +8,8 @@ install:
   - pip install ansible ansible-lint
   - ansible --version
 script:
-  - ansible-lint tasks/*.yml
+  - |
+    ANSIBLE_ROLES_PATH=$(pwd)/.. ansible-lint tests/test.yml
   - |
     ANSIBLE_ROLES_PATH=$(pwd)/.. ansible-playbook \
       -i tests/inventory \
