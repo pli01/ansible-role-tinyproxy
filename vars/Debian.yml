@@ -1,0 +1,4 @@
+---
+tinyproxy_config: "/etc/tinyproxy/tinyproxy.conf"
+tinyproxy_user: "tinyproxy"
+tinyproxy_pidfile: "/run/tinyproxy/tinyproxy.pid"

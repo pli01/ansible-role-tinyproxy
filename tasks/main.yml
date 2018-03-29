@@ -1,4 +1,8 @@
 ---
+- name: Add the OS specific variables
+  include_vars: '{{ ansible_os_family }}.yml'
+  tags: [ 'configuration', 'tinyproxy' ]
+
 - name: install tinyproxy for Debian OS family
   apt: pkg=tinyproxy state={{ tinyproxy_pkg_state }}
   when: ansible_os_family == 'Debian'
@@ -10,7 +14,7 @@
   tags: ["packages","tinyproxy"]
 
 - name: configure tinyproxy
-  template: src=tinyproxy.conf.j2 dest=/etc/tinyproxy.conf owner=root group=root mode=0644
+  template: src=tinyproxy.conf.j2 dest="{{ tinyproxy_conf }}" owner=root group=root mode=0644
   notify: restart tinyproxy
   tags: ["configuration","tinyproxy"]
 

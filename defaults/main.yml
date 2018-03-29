@@ -3,6 +3,7 @@ tinyproxy_user: "nobody"
 tinyproxy_group: "nogroup"
 tinyproxy_port: "8888"
 
+tinyproxy_config: "/etc/tinyproxy/tinyproxy.conf"
 tinyproxy_listen: "0.0.0.0"
 tinyproxy_timeout: 600
 tinyproxy_statfile: "/usr/share/tinyproxy/stats.html"
