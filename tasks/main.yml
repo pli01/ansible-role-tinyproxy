@@ -14,7 +14,7 @@
   tags: ["packages","tinyproxy"]
 
 - name: configure tinyproxy
-  template: src=tinyproxy.conf.j2 dest="{{ tinyproxy_conf }}" owner=root group=root mode=0644
+  template: src=tinyproxy.conf.j2 dest="{{ tinyproxy_config }}" owner=root group=root mode=0644
   notify: restart tinyproxy
   tags: ["configuration","tinyproxy"]
 
