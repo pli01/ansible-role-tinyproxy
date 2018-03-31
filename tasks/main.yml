@@ -1,6 +1,9 @@
 ---
 - name: Add the OS specific variables
-  include_vars: '{{ ansible_os_family }}.yml'
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_os_family }}-{{ ansible_distribution_release }}.yaml"
+    - "{{ ansible_os_family }}.yaml"
   tags: [ 'configuration', 'tinyproxy' ]
 
 - name: install tinyproxy for Debian OS family
