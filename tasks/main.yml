@@ -8,12 +8,12 @@
 
 - name: install tinyproxy for Debian OS family
   apt: pkg=tinyproxy state={{ tinyproxy_pkg_state }}
-  when: ansible_distribution == 'Debian'
+  when: ansible_os_family == 'Debian'
   tags: ["packages","tinyproxy"]
 
 - name: install tinyproxy for RedHat OS family
   yum: name=tinyproxy state={{ tinyproxy_pkg_state }}
-  when: ansible_distribution == 'RedHat'
+  when: ansible_os_family == 'RedHat'
   tags: ["packages","tinyproxy"]
 
 - name: configure tinyproxy
