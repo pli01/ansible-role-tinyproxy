@@ -9,6 +9,8 @@ install:
   - ansible --version
 script:
   - |
+    ansible -ilocalhost, -c local localhost -m setup -a "filter=ansible_distribution*"
+  - |
     ANSIBLE_ROLES_PATH=$(pwd)/.. ansible-lint tests/test.yml
   - |
     ANSIBLE_ROLES_PATH=$(pwd)/.. ansible-playbook \
